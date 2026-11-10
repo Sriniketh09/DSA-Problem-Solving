@@ -1,0 +1,25 @@
+class Solution(object):
+    def checkXMatrix(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: bool
+        """
+        res = True
+        length = len(grid)
+        is_even = length%2 == 0
+        for i in range(length):
+            row = grid[i]
+            if length>2:
+                diagonal_cond = row[i] != 0 and row[-1-i]!=0
+                if not is_even and i == length//2:
+                    zero_cond = row.count(0) == length-1
+                else:
+                    zero_cond = row.count(0) == length-2
+                if not (zero_cond and diagonal_cond): 
+                    res = False
+                    break
+            else:
+                if 0 in row:
+                    res = False
+                    break
+        return res
